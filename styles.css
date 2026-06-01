@@ -1782,6 +1782,7 @@ h2 {
   background:
     radial-gradient(circle at 50% 44%, rgba(229, 34, 30, 0.24) 0 7%, rgba(229, 34, 30, 0.1) 18%, transparent 48%),
     repeating-conic-gradient(from -8deg at 50% 44%, rgba(255, 255, 255, 0.04) 0 2deg, transparent 2deg 10deg);
+  transform-origin: 50% 44%;
   animation: tunnel 10s linear infinite;
   opacity: 0.5;
 }
