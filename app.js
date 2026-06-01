@@ -74,6 +74,30 @@ function isInteractiveTarget(target) {
   return Boolean(target?.closest?.("a, button, input, textarea, select, [role='button']"));
 }
 
+function rememberVideoSource(video) {
+  const source = video.getAttribute("src");
+  if (source && !video.dataset.src) {
+    video.dataset.src = source;
+  }
+}
+
+function restoreVideoSource(video) {
+  if (!video.dataset.src || video.getAttribute("src")) return;
+  video.setAttribute("src", video.dataset.src);
+  video.load();
+}
+
+function stripVideoSource(video) {
+  const source = video.getAttribute("src");
+  if (!source) return;
+  if (!video.dataset.src) {
+    video.dataset.src = source;
+  }
+  video.pause();
+  video.removeAttribute("src");
+  video.load();
+}
+
 function clamp(value, min, max) {
   return Math.min(Math.max(value, min), max);
 }
@@ -659,7 +683,15 @@ function clearAllInlineStyles() {
     window.clearTimeout(releaseTimer);
     releaseTimer = null;
   }
-  cards.forEach((card) => {
+  const relevantCards = touchMotionQuery.matches
+    ? [...new Set([
+        cards[activeIndex],
+        dragTargetIndex !== null ? cards[dragTargetIndex] : null,
+        ...cards.filter((card) => card.classList.contains("is-drag-target")),
+      ].filter(Boolean))]
+    : cards;
+
+  relevantCards.forEach((card) => {
     card.style.transition = "";
     card.style.transform = "";
     card.style.opacity = "";
@@ -707,8 +739,10 @@ function commitDrag(targetIndex, deltaX, deltaY, velocity) {
     active.style.boxShadow = "0 48px 120px rgba(0, 0, 0, 0.72), inset 0 1px rgba(255, 255, 255, 0.16)";
   }
 
-  cards.forEach((card, index) => {
-    if (index === activeIndex) return;
+  const releaseCards = touchMode ? [cards[target]].filter(Boolean) : cards;
+  releaseCards.forEach((card, index) => {
+    if (!touchMode && index === activeIndex) return;
+    if (touchMode && card === active) return;
     card.style.transition = touchMode ? PAPER_RELEASE_TOUCH_TRANSITION : SPRING_TRANSITION;
   });
 
@@ -751,7 +785,15 @@ function releaseDrag(deltaX, deltaY) {
 function springBack() {
   const touchMode = touchMotionQuery.matches;
   // Apply spring transition to all cards and let CSS classes handle positioning
-  cards.forEach((card) => {
+  const relevantCards = touchMode
+    ? [...new Set([
+        cards[activeIndex],
+        dragTargetIndex !== null ? cards[dragTargetIndex] : null,
+        ...cards.filter((card) => card.classList.contains("is-drag-target")),
+      ].filter(Boolean))]
+    : cards;
+
+  relevantCards.forEach((card) => {
     card.style.transition = touchMode ? PAPER_RELEASE_TOUCH_TRANSITION : SPRING_TRANSITION;
     card.style.transform = "";
     card.style.opacity = "";
@@ -766,7 +808,7 @@ function springBack() {
 
   // After transition ends, clean up inline transitions
   setTimeout(() => {
-    cards.forEach((card) => {
+    relevantCards.forEach((card) => {
       card.style.transition = "";
     });
     deck.classList.remove("is-dragging");
@@ -910,20 +952,34 @@ function initLottie() {
 
 function syncMotion() {
   const reduceMotion = reducedMotionQuery.matches || document.hidden || motionSuspended;
+  const touchMode = touchMotionQuery.matches;
+  const desktopMode = desktopFrameQuery.matches;
 
   allVideos.forEach((video) => {
+    rememberVideoSource(video);
+
     const card = video.closest(".card");
     const dot = video.closest(".dot");
     const isActiveCardVideo = card?.classList.contains("is-active") ?? false;
     const isPagerVideo = Boolean(dot);
     const isActivePagerVideo = dot?.classList.contains("is-active") ?? false;
-    const isDesktopFrameVideo = video.classList.contains("desktop-loop") && desktopFrameQuery.matches;
-    const shouldPlay = !reduceMotion && (isActiveCardVideo || (isPagerVideo && isActivePagerVideo) || isDesktopFrameVideo);
+    const isDesktopFrameVideo = video.classList.contains("desktop-loop");
+    const shouldPlay = !reduceMotion && (
+      isActiveCardVideo ||
+      (isPagerVideo && (isActivePagerVideo || desktopMode)) ||
+      (isDesktopFrameVideo && desktopMode)
+    );
 
     video.muted = true;
     video.playsInline = true;
 
+    if (touchMode && (isDesktopFrameVideo || (card && !isActiveCardVideo) || (isPagerVideo && !isActivePagerVideo))) {
+      stripVideoSource(video);
+      return;
+    }
+
     if (shouldPlay) {
+      restoreVideoSource(video);
       if (video.preload !== "auto") {
         video.preload = "auto";
       }
@@ -1124,18 +1180,7 @@ document.addEventListener("visibilitychange", syncMotion);
   window.addEventListener(type, unlockMusicOnGesture, { passive: true });
 });
 
-let hoverFrame = 0;
 interactiveNodes.forEach((node) => {
-  node.addEventListener("pointermove", (event) => {
-    if (event.pointerType !== "mouse") return;
-    if (hoverFrame) return;
-    hoverFrame = requestAnimationFrame(() => {
-      hoverFrame = 0;
-      const rect = node.getBoundingClientRect();
-      node.style.setProperty("--mx", `${event.clientX - rect.left}px`);
-      node.style.setProperty("--my", `${event.clientY - rect.top}px`);
-    });
-  });
   if (!touchMotionQuery.matches) {
     node.addEventListener("mouseenter", () => blip("tap"));
   }
