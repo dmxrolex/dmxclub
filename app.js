@@ -14,8 +14,9 @@ const touchMotionQuery = window.matchMedia("(hover: none), (pointer: coarse)");
 const desktopFrameQuery = window.matchMedia("(min-width: 900px)");
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 const interactiveNodes = [
-  ...document.querySelectorAll("a, button, .base-tile, .feature-panel, .edge-row, .tool-row, .proof-strip a"),
+  ...document.querySelectorAll("a, button, .base-tile, .feature-panel, .edge-row, .tool-row, .fren-card, .proof-strip a"),
 ];
+const lottieElements = [...document.querySelectorAll("[data-lottie]")];
 
 let activeIndex = 0;
 let nativeScrollMode = false;
@@ -51,7 +52,8 @@ let nativeLastScrollTop = 0;
 let nativeScrollDirection = 0;
 let nativeProgrammaticScroll = false;
 let nativeProgrammaticTimer = 0;
-const lottieInstances = [];
+let lottieReady = false;
+const lottieInstances = new Map();
 
 // Velocity tracking
 const velocityHistory = [];
@@ -216,7 +218,6 @@ function toggleMusic(event) {
 
 function unlockMusicOnGesture(event) {
   if (event?.target?.closest?.(".music-toggle")) return;
-  if (!musicStarted && !musicUserPaused) tryPlayMusic();
 }
 
 function setCardClasses() {
@@ -939,27 +940,34 @@ function countUpStats() {
   });
 }
 
+function getLottieInstance(element) {
+  if (!lottieReady) return null;
+  const existing = lottieInstances.get(element);
+  if (existing) return existing;
+
+  const animation = window.lottie.loadAnimation({
+    container: element,
+    renderer: "svg",
+    loop: true,
+    autoplay: false,
+    path: element.dataset.lottie,
+    rendererSettings: {
+      preserveAspectRatio: "xMidYMid meet",
+      progressiveLoad: true,
+    },
+  });
+  const instance = { element, animation };
+  lottieInstances.set(element, instance);
+  return instance;
+}
+
 function initLottie() {
   if (!window.lottie) {
     document.documentElement.classList.add("no-lottie");
     return;
   }
 
-  document.querySelectorAll("[data-lottie]").forEach((element) => {
-    const animation = window.lottie.loadAnimation({
-      container: element,
-      renderer: "svg",
-      loop: true,
-      autoplay: false,
-      path: element.dataset.lottie,
-      rendererSettings: {
-        preserveAspectRatio: "xMidYMid meet",
-        progressiveLoad: true,
-      },
-    });
-    lottieInstances.push({ element, animation });
-  });
-
+  lottieReady = true;
   syncMotion();
 }
 
@@ -1015,13 +1023,16 @@ function syncMotion() {
     }
   });
 
-  lottieInstances.forEach(({ element, animation }) => {
+  lottieElements.forEach((element) => {
     const card = element.closest(".card");
     const shouldPlay = !reduceMotion && (!card || card.classList.contains("is-active"));
+    const instance = shouldPlay ? getLottieInstance(element) : lottieInstances.get(element);
+    if (!instance) return;
+
     if (shouldPlay) {
-      animation.play();
+      instance.animation.play();
     } else {
-      animation.pause();
+      instance.animation.pause();
     }
   });
 }
@@ -1218,7 +1229,6 @@ applyInteractionMode();
 setCardClasses();
 countUpStats();
 window.addEventListener("load", () => {
-  tryPlayMusic();
   if ('requestIdleCallback' in window) {
     requestIdleCallback(initLottie);
   } else {
