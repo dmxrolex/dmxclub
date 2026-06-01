@@ -1078,7 +1078,7 @@ dots.forEach((dot) => {
 
 swipeSurface.addEventListener("pointerdown", (event) => {
   if (nativeScrollMode) return;
-  if (isInteractiveTarget(event.target)) return;
+  if (event.pointerType !== "touch" && isInteractiveTarget(event.target)) return;
   if (event.pointerType === "touch") {
     activeTouchId = null;
   }
@@ -1097,7 +1097,6 @@ swipeSurface.addEventListener(
       handleNativeTouchStart(event);
       return;
     }
-    if (isInteractiveTarget(event.target)) return;
     if (dragging) return;
     if (activeTouchId !== null || event.touches.length !== 1) return;
     const touch = event.changedTouches[0];
