@@ -9,7 +9,7 @@ const swipeCue = document.querySelector(".swipe-cue");
 const soundButton = document.querySelector(".sound-toggle");
 const musicToggle = document.querySelector(".music-toggle");
 const bgMusic = document.querySelector("#bg-music");
-const allVideos = [...document.querySelectorAll("video")];
+const allVideos = [...document.querySelectorAll("video, .anim-media")];
 const touchMotionQuery = window.matchMedia("(hover: none), (pointer: coarse)");
 const desktopFrameQuery = window.matchMedia("(min-width: 900px)");
 const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -75,6 +75,7 @@ function isInteractiveTarget(target) {
 }
 
 function rememberVideoSource(video) {
+  if (video.tagName === 'IMG') return;
   const source = video.getAttribute("src");
   if (source && !video.dataset.src) {
     video.dataset.src = source;
@@ -82,12 +83,24 @@ function rememberVideoSource(video) {
 }
 
 function restoreVideoSource(video) {
+  if (video.tagName === 'IMG') {
+    if (video.getAttribute('src') !== video.dataset.src) {
+      video.setAttribute('src', video.dataset.src);
+    }
+    return;
+  }
   if (!video.dataset.src || video.getAttribute("src")) return;
   video.setAttribute("src", video.dataset.src);
   video.load();
 }
 
 function stripVideoSource(video) {
+  if (video.tagName === 'IMG') {
+    if (video.getAttribute('src') !== video.dataset.poster) {
+      video.setAttribute('src', video.dataset.poster);
+    }
+    return;
+  }
   const source = video.getAttribute("src");
   if (!source) return;
   if (!video.dataset.src) {
@@ -951,9 +964,9 @@ function initLottie() {
 }
 
 function syncMotion() {
-  const reduceMotion = reducedMotionQuery.matches || document.hidden || motionSuspended;
   const touchMode = touchMotionQuery.matches;
   const desktopMode = desktopFrameQuery.matches;
+  const reduceMotion = document.hidden || motionSuspended || (touchMode && reducedMotionQuery.matches);
 
   allVideos.forEach((video) => {
     rememberVideoSource(video);
@@ -970,8 +983,10 @@ function syncMotion() {
       (isDesktopFrameVideo && desktopMode)
     );
 
-    video.muted = true;
-    video.playsInline = true;
+    if (video.tagName !== 'IMG') {
+      video.muted = true;
+      video.playsInline = true;
+    }
 
     if (touchMode && (isDesktopFrameVideo || (card && !isActiveCardVideo) || (isPagerVideo && !isActivePagerVideo))) {
       stripVideoSource(video);
@@ -980,17 +995,23 @@ function syncMotion() {
 
     if (shouldPlay) {
       restoreVideoSource(video);
-      if (video.preload !== "auto") {
-        video.preload = "auto";
+      if (video.tagName !== 'IMG') {
+        if (video.preload !== "auto") {
+          video.preload = "auto";
+        }
+        if (video.readyState < 2 && !video.dataset.loadRequested) {
+          video.dataset.loadRequested = "true";
+          video.load();
+        }
+        const playPromise = video.play();
+        if (playPromise?.catch) playPromise.catch(() => {});
       }
-      if (video.readyState < 2 && !video.dataset.loadRequested) {
-        video.dataset.loadRequested = "true";
-        video.load();
-      }
-      const playPromise = video.play();
-      if (playPromise?.catch) playPromise.catch(() => {});
     } else {
-      video.pause();
+      if (video.tagName !== 'IMG') {
+        video.pause();
+      } else {
+        stripVideoSource(video);
+      }
     }
   });
 

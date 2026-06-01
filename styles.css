@@ -954,9 +954,9 @@ h2 {
     0 10px 24px rgba(0, 0, 0, 0.24);
 }
 
-.animated-icon video,
-.tool-icon video,
-.feature-anim video,
+.animated-icon .anim-media,
+.tool-icon .anim-media,
+.feature-anim .anim-media,
 .edge-anim video {
   width: 92%;
   height: 92%;
@@ -1662,7 +1662,7 @@ h2 {
   justify-content: center;
 }
 
-.feature-panel .feature-anim video {
+.feature-panel .feature-anim video, .anim-media {
   display: block;
   width: 100%;
   height: 100%;
@@ -2408,7 +2408,7 @@ h2 {
     animation: desktopScan 6.8s ease-in-out infinite;
   }
 
-  .desktop-loop {
+  .desktop-loop.anim-media {
     position: absolute;
     z-index: 2;
     width: clamp(54px, 5vw, 88px);
@@ -2646,10 +2646,10 @@ h2 {
   .lottie-hero,
   .contrib-bg-item,
   .pw-item,
-  .animated-icon video,
-  .tool-icon video,
-  .feature-anim video,
-  .edge-anim video,
+  .animated-icon .anim-media,
+  .tool-icon .anim-media,
+  .feature-anim .anim-media,
+  .edge-anim .anim-media,
   .dot video {
     filter: none;
   }
@@ -2909,9 +2909,9 @@ h2 {
   html.is-native-scroll .pw-item,
   html.is-native-scroll .float-item,
   html.is-native-scroll .contrib-bg-item,
-  html.is-native-scroll .animated-icon video,
-  html.is-native-scroll .tool-icon video,
-  html.is-native-scroll .feature-anim video,
+  html.is-native-scroll .animated-icon .anim-media,
+  html.is-native-scroll .tool-icon .anim-media,
+  html.is-native-scroll .feature-anim .anim-media,
   html.is-native-scroll .edge-anim video {
     filter: none !important;
   }
@@ -2923,7 +2923,8 @@ h2 {
 
 }
 
-@media (prefers-reduced-motion: reduce) {
+@media (prefers-reduced-motion: reduce) and (hover: none),
+  (prefers-reduced-motion: reduce) and (pointer: coarse) {
   *,
   *::before,
   *::after {
