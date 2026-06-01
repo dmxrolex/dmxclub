@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#090a10" />
+    <meta
+      name="description"
+      content="Join DMX Clan, a fast-growing Pixel World community on Telegram."
+    />
+    <meta property="og:title" content="DMX Clan" />
+    <meta
+      property="og:description"
+      content="Swipe into DMX: clan chat, Pixel World details, and in-game team join links."
+    />
+    <meta property="og:image" content="assets/dmxlogo.jpg" />
+    <title>DMX Clan</title>
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='16' fill='%2307080d'/%3E%3Cpath d='M14 45V19h13c8 0 13 5 13 13s-5 13-13 13H14Zm9-8h4c3 0 5-2 5-5s-2-5-5-5h-4v10Zm22 8V19h8v26h-8Z' fill='%23f8f8f4'/%3E%3Ccircle cx='52' cy='16' r='5' fill='%23e5221e'/%3E%3C/svg%3E"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;650;750;850;900&family=Inter+Tight:wght@700;800;900&family=Manrope:wght@500;600;700;800&family=Pixelify+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="stage" aria-label="DMX Clan swipe website">
+      <div class="ambient ambient-one"></div>
+      <div class="ambient ambient-two"></div>
+      <div class="grain"></div>
+      <div class="desktop-frame" aria-hidden="true">
+        <div class="desktop-grid"></div>
+        <div class="desktop-rail rail-left"></div>
+        <div class="desktop-rail rail-right"></div>
+        <img class="desktop-ghost ghost-left" src="assets/dmxlogo.jpg" alt="" />
+        <img class="desktop-ghost ghost-right" src="assets/web/pw-game-landscape-reference.png" alt="" />
+        <video class="desktop-loop desktop-loop-one" src="assets/nav/duck-clan.webm" poster="assets/nav/duck-clan.webp" muted loop autoplay playsinline preload="auto"></video>
+        <video class="desktop-loop desktop-loop-two" src="assets/nav/duck-base.webm" poster="assets/nav/duck-base.webp" muted loop autoplay playsinline preload="auto"></video>
+        <video class="desktop-loop desktop-loop-three" src="assets/nav/duck-pixel.webm" poster="assets/nav/duck-pixel.webp" muted loop autoplay playsinline preload="auto"></video>
+        <video class="desktop-loop desktop-loop-four" src="assets/nav/duck-edge.webm" poster="assets/nav/duck-edge.webp" muted loop autoplay playsinline preload="auto"></video>
+        <div class="desktop-corners"></div>
+        <div class="desktop-scan"></div>
+      </div>
+      <audio id="bg-music" src="assets/music/Post%20Malone,%20Swae%20Lee%20-%20Sunflower%20%28Spider-Man_%20Into%20the%20Spider-Verse%29.mp3" loop preload="auto"></audio>
+
+      <main class="phone" aria-roledescription="carousel" aria-label="DMX Clan cards">
+        <header class="topbar" aria-label="Deck controls">
+          <button class="icon-button" type="button" data-action="prev" aria-label="Previous card">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m15 5-7 7 7 7" />
+            </svg>
+          </button>
+          <button class="music-toggle is-paused" type="button" aria-label="Play music" aria-pressed="false">
+            <span class="music-disc" aria-hidden="true">
+              <span class="music-disc-shine"></span>
+              <span class="music-disc-hole"></span>
+            </span>
+          </button>
+        </header>
+
+        <section class="deck" id="deck" aria-live="polite">
+          <article class="card hero-card is-active" data-card="0" aria-label="DMX Clan">
+            <img class="hero-image" src="assets/dmxlogo.jpg" alt="" fetchpriority="high" />
+            <div class="card-shade"></div>
+            <div class="pixel-storm" aria-hidden="true"></div>
+            <div class="crosshair crosshair-one"></div>
+            <div class="hero-copy">
+              <h1><span class="hero-name-line">DMX<span class="lottie-badge hero-flag" data-lottie="assets/dmxflag.json" aria-hidden="true"></span></span><br />CLAN</h1>
+              <p class="lead">Fast-growing Pixel World club.</p>
+            </div>
+            <div class="member-slab" aria-label="73 plus club members">
+              <div class="member-avatars" aria-hidden="true">
+                <img src="assets/Pepe00.png" alt="" />
+                <img src="assets/pixelhead.jpg" alt="" />
+                <span>+</span>
+              </div>
+              <strong data-count="73">0</strong>
+              <span>Club members</span>
+            </div>
+            <div class="action-grid hero-actions">
+              <a class="action primary" href="https://t.me/pixelworld/play?startapp=eyJ0ZWFtIjo0MX0" target="_blank" rel="noreferrer">
+                <span class="action-icon image-icon">
+                  <img src="assets/button-icons/profile.webp" alt="" />
+                </span>
+                <span>Join Clan</span>
+              </a>
+              <a class="action ghost" href="https://t.me/ClubDMX" target="_blank" rel="noreferrer">
+                <span class="action-icon image-icon">
+                  <img src="assets/button-icons/chat.webp" alt="" />
+                </span>
+                <span>Clan Chat</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card base-card" data-card="1" aria-label="DMX Base">
+            <img class="card-bg" src="assets/dmxchannellogo.jpg" alt="" loading="lazy" />
+            <div class="card-shade"></div>
+            <div class="pixel-storm" aria-hidden="true"></div>
+            <div class="section-copy">
+              <div class="title-lockup">
+                <h2>DMX<br />BASE</h2>
+                <div class="lottie-badge title-flag" data-lottie="assets/dmxflag.json" aria-hidden="true"></div>
+              </div>
+              <p class="lead">A place to play together, build strategy, and push the clan forward.</p>
+            </div>
+            <div class="base-grid community-list" aria-label="DMX community focus">
+              <div class="base-tile compact-row">
+                <span class="animated-icon tone-green">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADaX4AAjvykUs.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div><strong>Play Together</strong><small>Queue, match up, and move as one club.</small></div>
+              </div>
+              <div class="base-tile compact-row">
+                <span class="animated-icon tone-red">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADhHUAAq4-yUo.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div><strong>Push The Clan</strong><small>Grow rank, activity, and team presence.</small></div>
+              </div>
+              <div class="base-tile compact-row">
+                <span class="animated-icon tone-blue">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADTIIAAhMYMEo.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div><strong>Active Community</strong><small>Members, updates, quick help, and chat.</small></div>
+              </div>
+              <div class="base-tile compact-row">
+                <span class="animated-icon tone-gold">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgAD7IMAAmapsUk.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div><strong>Giveaways</strong><small>Drops, rewards, and community moments.</small></div>
+              </div>
+              <div class="base-tile compact-row">
+                <span class="animated-icon tone-white">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADWoYAAum44Uo.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div><strong>Build Strategies</strong><small>Share market reads, game plans, and tactics.</small></div>
+              </div>
+            </div>
+            <div class="action-grid">
+              <a class="action primary" href="https://t.me/ClubDMX" target="_blank" rel="noreferrer">
+                <span class="action-icon image-icon">
+                  <img src="assets/button-icons/telegram.webp" alt="" />
+                </span>
+                <span>Join Chat</span>
+              </a>
+              <a class="action ghost" href="https://t.me/DMX_Core" target="_blank" rel="noreferrer">
+                <span class="action-icon image-icon">
+                  <img src="assets/button-icons/chat.webp" alt="" />
+                </span>
+                <span>Clan Updates</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card contributions-card" data-card="2" aria-label="DMX Contributions">
+            <div class="pixel-grid"></div>
+            <img class="contrib-bg-item contrib-coin" src="assets/ingamecurrency.jpg" alt="" loading="lazy" />
+            <img class="contrib-bg-item contrib-gift" src="assets/promocode.jpg" alt="" loading="lazy" />
+            <div class="section-copy contrib-copy">
+              <h2 class="contrib-title">DMX<br />CONTRIBUTIONS</h2>
+              <p class="lead">Community-built tools for Pixel World and Not Games markets.</p>
+            </div>
+            <div class="tool-list" aria-label="DMX community tools">
+              <a class="tool-row" href="https://t.me/NotMarket_Tools_bot" target="_blank" rel="noreferrer">
+                <span class="tool-icon has-video tone-blue">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADoH0AAgePkUs.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div>
+                  <strong>NotMarket Tools</strong>
+                  <small>Aggregator, not a shop: best prices, supply, TON/USD inventory, trend graphs.</small>
+                </div>
+              </a>
+              <a class="tool-row" href="https://t.me/NotGames_Feed" target="_blank" rel="noreferrer">
+                <span class="tool-icon has-video tone-red">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADo1YAAvCZmEs.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div>
+                  <strong>NotGames Feed</strong>
+                  <small>Live sales, lootbox burns, mints, and whale moves from all markets.</small>
+                </div>
+              </a>
+              <a class="tool-row" href="https://t.me/DMX_Core/234" target="_blank" rel="noreferrer">
+                <span class="tool-icon has-video tone-gold">
+                  <video src="assets/assets%20webm%20for%20icons/not_px_AgADDYEAAmBXsUk.webm" muted loop playsinline preload="none"></video>
+                </span>
+                <div>
+                  <strong>Price Info Stickers</strong>
+                  <small>Live Pixel World item and skin prices inside sticker packs.</small>
+                </div>
+              </a>
+            </div>
+            <div class="proof-block">
+              <strong>Recognized by Pixel Market and community channels</strong>
+              <div class="proof-strip" data-no-drag>
+                <a href="https://t.me/thanks_david/68" target="_blank" rel="noreferrer">
+                  <img src="assets/proof/thanks-david-68.png" alt="Thanks David post about NotMarket Tools" />
+                  <span>Thanks David</span>
+                </a>
+                <a href="https://t.me/pixelmarket_fam/89" target="_blank" rel="noreferrer">
+                  <img src="assets/proof/pixelmarket-fam-89.png" alt="Pixel Market Community post forwarding NotGames Feed" />
+                  <span>Pixel Market</span>
+                </a>
+                <a href="https://t.me/pixelmarket_fam/74" target="_blank" rel="noreferrer">
+                  <img src="assets/proof/pixelmarket-fam-74.png" alt="Pixel Market Community recognition post" />
+                  <span>Market Proof</span>
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card pixel-card" data-card="3" aria-label="Pixel World">
+            <div class="pixel-grid"></div>
+            <img class="pw-screen" src="assets/web/pw-game-landscape-reference.png" alt="Pixel World web game screen" loading="lazy" />
+            <img class="pw-item pw-premium" src="assets/premium.jpg" alt="" loading="lazy" />
+            <img class="pw-item pw-currency" src="assets/ingamecurrency.jpg" alt="" loading="lazy" />
+            <div class="section-copy">
+              <img class="pixel-logo" src="assets/pixelworldlogo.jpg" alt="Pixel World icon" loading="lazy" />
+              <h2>Pixel<br />World</h2>
+              <p class="lead">
+                FPS shooter on Telegram and web with clans, maps, weapons, PX Gems, and mobile updates.
+              </p>
+            </div>
+            <div class="feature-grid" aria-label="Pixel World systems">
+              <div class="feature-panel tone-red">
+                <span class="feature-anim"><video src="assets/assets%20webm%20for%20icons/not_px_AgADhHUAAq4-yUo.webm" muted loop playsinline preload="none"></video></span>
+                <strong>Clans</strong>
+                <span>Team tags and squad identity.</span>
+              </div>
+              <div class="feature-panel tone-green">
+                <span class="feature-anim"><video src="assets/assets%20webm%20for%20icons/not_px_AgADaX4AAjvykUs.webm" muted loop playsinline preload="none"></video></span>
+                <strong>Maps</strong>
+                <span>New arenas and private matches.</span>
+              </div>
+              <div class="feature-panel tone-white">
+                <span class="feature-anim"><video src="assets/assets%20webm%20for%20icons/not_px_AgADWoYAAum44Uo.webm" muted loop playsinline preload="none"></video></span>
+                <strong>Weapons</strong>
+                <span>Ammo, loadouts, upgrades.</span>
+              </div>
+              <div class="feature-panel tone-blue">
+                <span class="feature-anim"><video src="assets/assets%20webm%20for%20icons/not_px_AgADJGUAAhzHmUs.webm" muted loop playsinline preload="none"></video></span>
+                <strong>PX Gems</strong>
+                <span>Earn through active play.</span>
+              </div>
+            </div>
+            <div class="action-grid">
+              <a class="action primary" href="https://t.me/pixelworld" target="_blank" rel="noreferrer">
+                <span class="action-icon image-icon">
+                  <img src="assets/button-icons/telegram.webp" alt="" />
+                </span>
+                <span>Play on Telegram</span>
+              </a>
+              <a class="action ghost" href="https://pw.game" target="_blank" rel="noreferrer">
+                <span class="action-icon image-icon">
+                  <img src="assets/button-icons/globe.webp" alt="" />
+                </span>
+                <span>Open Web</span>
+              </a>
+            </div>
+          </article>
+
+          <article class="card loadout-card" data-card="4" aria-label="DMX Edge">
+            <img class="clan-preview" src="assets/clanpage.png" alt="DMX in-game clan page preview" loading="lazy" />
+            <img class="float-item premium" src="assets/premium.jpg" alt="" loading="lazy" />
+            <img class="float-item promo" src="assets/promocode.jpg" alt="" loading="lazy" />
+            <img class="float-item currency" src="assets/ingamecurrency.jpg" alt="" loading="lazy" />
+            <div class="section-copy compact">
+              <h2>DMX<br />EDGE</h2>
+              <p class="lead">Built for players who want a real club around the game.</p>
+            </div>
+            <div class="edge-list" aria-label="DMX benefits">
+              <div class="edge-row">
+                <span class="edge-anim tone-blue"><video src="assets/assets%20webm%20for%20icons/not_px_AgADTIIAAhMYMEo.webm" muted loop playsinline preload="none"></video></span>
+                <div><strong>Members first</strong><span>Chat that helps players move together.</span></div>
+              </div>
+              <div class="edge-row">
+                <span class="edge-anim tone-white"><video src="assets/assets%20webm%20for%20icons/not_px_AgADo1YAAvCZmEs.webm" muted loop playsinline preload="none"></video></span>
+                <div><strong>Clean updates</strong><span>Announcements, drops, and match notes.</span></div>
+              </div>
+              <div class="edge-row">
+                <span class="edge-anim tone-red"><video src="assets/assets%20webm%20for%20icons/not_px_AgADDYEAAmBXsUk.webm" muted loop playsinline preload="none"></video></span>
+                <div><strong>Leader presence</strong><span>One clear current lead for the club.</span></div>
+              </div>
+              <div class="edge-row">
+                <span class="edge-anim tone-gold"><video src="assets/assets%20webm%20for%20icons/not_px_AgAD7IMAAmapsUk.webm" muted loop playsinline preload="none"></video></span>
+                <div><strong>Early clan energy</strong><span>Grow with the club while teams form.</span></div>
+              </div>
+            </div>
+            <a class="action primary wide-action" href="https://t.me/pixelworld/play?startapp=eyJ0ZWFtIjo0MX0" target="_blank" rel="noreferrer">
+              <span class="action-icon image-icon">
+                <img src="assets/button-icons/profile.webp" alt="" />
+              </span>
+              <span>Join Clan</span>
+            </a>
+          </article>
+
+          <article class="card join-card" data-card="5" aria-label="Join DMX">
+            <div class="launch-tunnel"></div>
+            <div class="lottie-hero" data-lottie="assets/dmxanimationwithgun.json" aria-hidden="true"></div>
+            <div class="section-copy join-copy">
+              <h2>Ready<br />to fight?</h2>
+              <p class="lead">Join, compete, grow together, and have fun while you can.</p>
+            </div>
+            <div class="link-matrix">
+              <a href="https://t.me/pixelworld/play?startapp=eyJ0ZWFtIjo0MX0" target="_blank" rel="noreferrer">
+                <span class="matrix-icon"><img src="assets/button-icons/profile.webp" alt="" /></span>
+                <span>Join Clan</span>
+              </a>
+              <a href="https://t.me/ClubDMX" target="_blank" rel="noreferrer">
+                <span class="matrix-icon"><img src="assets/button-icons/chat.webp" alt="" /></span>
+                <span>Chat</span>
+              </a>
+              <a href="https://t.me/DMX_Core" target="_blank" rel="noreferrer">
+                <span class="matrix-icon"><img src="assets/button-icons/telegram.webp" alt="" /></span>
+                <span>Clan Updates</span>
+              </a>
+              <a href="https://pw.game" target="_blank" rel="noreferrer">
+                <span class="matrix-icon"><img src="assets/button-icons/pixelworld-adaptive.webp" alt="" /></span>
+                <span>Pixel World</span>
+              </a>
+            </div>
+            <p class="disclaimer">Community clan for Pixel World players. Not an official Pixel World website.</p>
+          </article>
+        </section>
+
+        <nav class="pager" aria-label="Card navigation">
+          <button class="dot media-dot trim-black is-active" type="button" data-go="0" aria-label="Go to DMX Clan">
+            <video src="assets/nav/duck-clan.webm" poster="assets/nav/duck-clan.webp" muted loop playsinline preload="none"></video>
+          </button>
+          <button class="dot media-dot trim-dark" type="button" data-go="1" aria-label="Go to DMX Base">
+            <video src="assets/nav/duck-base.webm" poster="assets/nav/duck-base.webp" muted loop playsinline preload="none"></video>
+          </button>
+          <button class="dot media-dot trim-dark" type="button" data-go="2" aria-label="Go to DMX Contributions">
+            <video src="assets/nav/duck-contrib.webm" poster="assets/nav/duck-contrib.webp" muted loop playsinline preload="none"></video>
+          </button>
+          <button class="dot media-dot trim-dark" type="button" data-go="3" aria-label="Go to Pixel World">
+            <video src="assets/nav/duck-pixel.webm" poster="assets/nav/duck-pixel.webp" muted loop playsinline preload="none"></video>
+          </button>
+          <button class="dot media-dot trim-dark" type="button" data-go="4" aria-label="Go to DMX Edge">
+            <video src="assets/nav/duck-edge.webm" poster="assets/nav/duck-edge.webp" muted loop playsinline preload="none"></video>
+          </button>
+          <button class="dot media-dot trim-dark" type="button" data-go="5" aria-label="Go to Join">
+            <video src="assets/nav/duck-join.webm" poster="assets/nav/duck-join.webp" muted loop playsinline preload="none"></video>
+          </button>
+        </nav>
+        <button class="swipe-cue" type="button" data-action="next" aria-label="Swipe up for next card">
+          <span>Swipe up for next</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5" /><path d="m6 11 6-6 6 6" /></svg>
+        </button>
+      </main>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js" crossorigin="anonymous" defer></script>
+    <script src="app.js"></script>
+  </body>
+</html>
